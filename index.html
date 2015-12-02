@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>The Chart</title>
+	<style>
+			body {
+				background-color: #ffffff;
+				margin: 0;
+				overflow: hidden;
+			}
+			.label {
+			  width:100px;
+			  height:20px;
+			  text-align: center;
+			}
+			a {
+				color: #000000;
+			}
+
+			.buttons{
+				border: 1px solid;
+				display: inline-block;
+				margin-right:5px;
+				cursor: pointer;
+				padding: 5px 10px;
+				background-color:#fff;
+			}
+
+			#top {
+				position: absolute;
+				top:0;
+				left:0;
+				z-index: 10000000;
+				padding:10px;
+			}
+
+			#container {
+				cursor:pointer;
+				z-index: 0;
+				width: 100%;
+				height: 100%;
+				min-height:400px;
+				min-width: 400px;
+			}
+			canvas{
+				z-index: 0;
+			}
+
+		</style>
+</head>
+<body>
+
+<div id="container"></div>
+
+<div id="top">
+  <div class="buttons" id="camera-1">Top</div>
+  <div class="buttons" id="camera-2">Side</div>
+  <div class="buttons" id="camera-3">default</div>
+  Click &amp; drag the graph around. 
+</div>
+
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/three.js/three.js"></script>
+<script src="./js/vendor/OrbitControls.js"></script>
+<script src="./js/vendor/CSS3DRenderer.js"></script>
+<script src="./js/vendor/Detector.js"></script>
+<script src="./js/vendor/Stats.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>
