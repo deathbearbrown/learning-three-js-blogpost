@@ -1,0 +1,5 @@
+# ignore vim temp files
+*.swp
+
+# ignor bower_components folder
+**/bower_components/

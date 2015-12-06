@@ -16,6 +16,7 @@ var windowWidth = $("#container").innerWidth(),
 var realData;
 
 var startPosition;
+var animationID;
 
 
 var data = {
@@ -409,6 +410,7 @@ function onWindowResize() {
 
   $(".buttons").bind('click',function(){
   	if ($(this).attr('id')=="camera-1"){
+      stop(); 
 			console.log("camera one");
 			controls.reset();
 			var vFOVRadians = 2 * Math.atan( windowHeight / ( 2 * 35000 ) ),
@@ -424,6 +426,7 @@ function onWindowResize() {
   	}
 
 		if ($(this).attr('id')=="camera-2"){
+      stop(); 
 			console.log("camera two");
 			controls.reset();
 
@@ -437,6 +440,7 @@ function onWindowResize() {
 		}
 
 		if ($(this).attr('id')=="camera-3"){
+      stop(); 
   		console.log("camera three");
   		controls.reset();
   		camera.fov = 30;
@@ -444,5 +448,40 @@ function onWindowResize() {
 			render();
   	}
 
+		if ($(this).attr('id')=="camera-4"){
+      stop(); 
+  		console.log("dolly zoom!");
+  		controls.reset();
+  		camera.fov = 30;
+      start();
+  	}
 
   });
+
+function start() {
+  if(!animationID) {
+    dollyZoom();
+  }
+}
+
+function dollyZoom() {
+  animationID = requestAnimationFrame(dollyZoom);
+  var r = Date.now() * 0.0005;
+  var minFOV = 150;
+  var osc = Math.pow( Math.sin( 0.5 * r ), 2);
+
+  camera.fov = minFOV + 100 * -osc;
+  camera.position.z = -100 - (400 * osc)*.9;
+  camera.position.y = 100;
+  camera.updateProjectionMatrix();
+
+  stats.update();
+  render();
+}
+
+function stop() {
+  if(animationID) {
+    cancelAnimationFrame(animationID);
+    animationID = undefined;
+  }
+}
